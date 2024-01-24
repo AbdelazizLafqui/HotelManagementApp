@@ -6,5 +6,5 @@ export interface Reservation {
     roomId: number;
     checkInDate: Date;
     checkOutDate: Date;
-    Amount: number;
+    amount: number;
 }

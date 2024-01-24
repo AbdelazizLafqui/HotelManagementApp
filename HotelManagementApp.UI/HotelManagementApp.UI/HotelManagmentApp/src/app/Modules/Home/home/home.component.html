@@ -1,4 +1,61 @@
 
 <title>Rooms</title>
+
 <table class="table">
+    <tr>
+        <th>Room Number</th>
+        <th>Floor Number</th>
+        <th>Type</th>
+        <th>Bed</th>
+        <th>Capacity</th>
+        <th>Amenities</th>
+        <th>Price</th>
+    </tr>
+    <tr *ngFor="let room of rooms;">
+        <td>{{room.roomNumber}}</td>
+        <td>{{room.floorNumber}}</td>
+        <td>{{room.roomType}}</td>
+        <td>{{room.bed}}</td>
+        <td>{{room.capacity}}</td>
+        <td>{{room.amenities}}</td>
+        <td>{{room.price | currency : 'MAD'}}</td>
+        <td>{{room.amenities | titlecase}}</td>
+        <!-- <td>
+             <button class="btn btn-primary" (click)="selectRoom(room)">
+                Select
+            </button> 
+            <button class="btn btn-primary" [routerLink]="['/rooms',room.roomNumber]">Book Room</button>
+        </td> -->
+        <td>
+            <button class="btn btn-primary" [routerLink]="['/rooms',room.roomNumber]">Delete room</button>
+        </td>
+    </tr>
+
+</table>
+
+<title>Reservations</title>
+
+<table class="table">
+    <tr>
+        <th>Guest Name</th>
+        <th>Mobile Number</th>
+        <th>Email</th>
+        <th>Room</th>
+        <th>Check-In Date</th>
+        <th>Check-Out Date</th>
+        <th>Check-Out Date</th>
+    </tr>
+    <tr *ngFor="let reservation of reservations;">
+        <td>{{reservation.guestName}}</td>
+        <td>{{reservation.mobileNumber}}</td>
+        <td>{{reservation.email}}</td>
+        <td>{{reservation.roomId}}</td>
+        <td>{{reservation.checkInDate}}</td>
+        <td>{{reservation.checkOutDate}}</td>
+        <td>{{reservation.amount | currency : 'MAD'}}</td>
+        <td>
+            <button class="btn btn-primary" [routerLink]="['/rooms',reservation.reservationId]">Delete reservation</button>
+        </td>
+    </tr>
+
 </table>
