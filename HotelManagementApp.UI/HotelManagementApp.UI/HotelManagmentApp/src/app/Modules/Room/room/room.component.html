@@ -1,0 +1,51 @@
+{{AddingRoomForm.value | json}}
+
+<form [formGroup]="AddingRoomForm">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Room Number</mat-label>
+        <input type="number" matInput formControlName="roomNumber" placeholder="Ex. 27">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Floor Number</mat-label>
+        <input type="number" matInput formControlName="floorNumber" placeholder="Ex. 3">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Room Type</mat-label>
+        <mat-select formControlName="roomType">
+            <mat-option value="single">Single</mat-option>
+            <mat-option value="double">Double</mat-option>
+            <mat-option value="suite">Suite</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Bed Configuration</mat-label>
+        <mat-select formControlName="bedConfiguration">
+            <mat-option value="king">King</mat-option>
+            <mat-option value="queen">Queen</mat-option>
+            <mat-option value="twin">Twin</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Room Capacity</mat-label>
+        <input type="number" matInput formControlName="roomCapacity" placeholder="Ex. 2">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Amenities</mat-label>
+        <textarea matInput formControlName="amenities" placeholder="Wifi, Private Pool, Gym ...etc"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Price per night</mat-label>
+        <input type="number" matInput formControlName="pricePerNight" placeholder="120.50">
+    </mat-form-field>
+</form>
+
+<div>
+    <button [disabled]="AddingRoomForm.invalid" mat-raised-button color="primary">Add Room</button>
+</div>
