@@ -32,7 +32,7 @@ namespace HotelManagementApp.Api.Controllers
 
             return authResult.Match(
                 authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
-                errors => Problem(errors));
+                errors => GlobalProblems(errors));
         }
 
         [HttpPost("login")]
@@ -47,7 +47,7 @@ namespace HotelManagementApp.Api.Controllers
 
             return authResult.Match(
                 authResult => Ok(_mapper.Map<AuthenticationResponse>(authResult)),
-                errors => Problem(errors));
+                errors => GlobalProblems(errors));
         }
     }
 }

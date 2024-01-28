@@ -39,7 +39,7 @@ namespace HotelManagementApp.Application.Authentication.Register.Commands
 
             var token = _jwtTokenGenerator.GenerateToken(newUser);
 
-            _userRepository.Add(newUser);
+            _userRepository.AddUser(newUser);
 
             var userDto = newUser.Adapt<UserDto>();
 

@@ -14,7 +14,7 @@ namespace HotelManagementApp.Infrastructure.Users.Persistence
             this._hotelManagementDbContext = hotelManagementDbContext;
         }
 
-        public void Add(User user)
+        public void AddUser(User user)
         {
             _hotelManagementDbContext.Users.Add(user);
             _hotelManagementDbContext.SaveChanges();
