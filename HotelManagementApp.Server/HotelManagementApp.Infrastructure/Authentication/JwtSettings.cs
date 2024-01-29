@@ -6,6 +6,6 @@ public class JwtSettings
     public string SecretKey { get; init; } = null!;
     public int ExpiryMinutes { get; init; }
     public string? Issuer { get; init; }
-    public required string Audience { get; init; }
+    public string Audience { get; init; }
 
 }

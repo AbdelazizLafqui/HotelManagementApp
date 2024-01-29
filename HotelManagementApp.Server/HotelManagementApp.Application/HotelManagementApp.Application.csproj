@@ -18,9 +18,4 @@
     <ProjectReference Include="..\HotelManagementApp.Domain\HotelManagementApp.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Reservation\" />
-    <Folder Include="Room\Commands\" />
-  </ItemGroup>
-
 </Project>

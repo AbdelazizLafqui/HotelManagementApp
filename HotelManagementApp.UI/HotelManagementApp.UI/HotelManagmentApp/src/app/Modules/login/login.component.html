@@ -1,0 +1,42 @@
+<button (click)="showRegisterForm()" mat-raised-button color="primary">{{registerFormLabel}}</button>
+
+<form *ngIf="showForm" [formGroup]="loginForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Enter your Email">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="Enter your Password">
+    </mat-form-field>
+
+    <div class="form-group">
+        <button class="btn btn-primary" [disabled]="loginForm.invalid" type="submit" (click)="login()" mat-raised-button color="primary">Login</button>
+    </div>
+
+</form>
+<form *ngIf="!showForm"  [formGroup]="registerForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input type="text" matInput formControlName="firstName" placeholder="Enter your First Name">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input type="text" matInput formControlName="lastName" placeholder="Enter your Last Name">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Enter your Email">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password" placeholder="Enter your Password">
+    </mat-form-field>
+    <div class="form-group">
+        <button class="btn btn-primary" [disabled]="registerForm.invalid" type="submit" (click)="register()" mat-raised-button color="primary">Register</button>
+    </div>
+</form>

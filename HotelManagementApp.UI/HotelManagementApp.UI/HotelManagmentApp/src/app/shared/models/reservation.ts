@@ -1,5 +1,5 @@
 export interface Reservation {
-    reservationId: number;
+    reservationId: string;
     guestName: string;
     mobileNumber: string;
     email: string;

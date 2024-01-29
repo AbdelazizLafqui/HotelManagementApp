@@ -47,5 +47,5 @@
 </form>
 
 <div>
-    <button [disabled]="AddingRoomForm.invalid" mat-raised-button color="primary">Add Room</button>
+    <button [disabled]="AddingRoomForm.invalid" mat-raised-button  (click)="addRoom()" color="primary">Add Room</button>
 </div>

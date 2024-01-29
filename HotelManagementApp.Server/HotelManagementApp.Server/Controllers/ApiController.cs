@@ -1,11 +1,13 @@
 using ErrorOr;
 using HotelManagementApp.Api.Common.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace BubberDinner.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class ApiController : ControllerBase
     {
         protected IActionResult GlobalProblems(List<Error> errors)

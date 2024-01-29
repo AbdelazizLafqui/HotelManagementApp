@@ -2,7 +2,7 @@
 {
     public abstract class Entity
     {
-        public Guid Id { get; private init; }
+        public Guid Id { get; private init; } = Guid.NewGuid();
 
 
         protected Entity(Guid id)

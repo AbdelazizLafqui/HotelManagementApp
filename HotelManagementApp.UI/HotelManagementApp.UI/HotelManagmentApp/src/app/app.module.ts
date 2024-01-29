@@ -19,6 +19,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReservationComponent } from './Modules/Reservation/reservation/reservation.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './Modules/Home/home/home.component';
+import { LoginComponent } from './Modules/login/login.component';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RequestInterceptor } from './core/interceptors/request.interceptor';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -28,6 +33,7 @@ import { HomeComponent } from './Modules/Home/home/home.component';
     AppNavComponent,
     ReservationComponent,
     HomeComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,11 +50,19 @@ import { HomeComponent } from './Modules/Home/home/home.component';
     MatSidenavModule,
     MatIconModule,
     BrowserAnimationsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    HttpClientModule,
+    MatTableModule
 
   ],
   providers: [
-    provideClientHydration()
+    provideHttpClient(withFetch()),
+    provideClientHydration(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })

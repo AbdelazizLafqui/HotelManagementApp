@@ -14,15 +14,16 @@ namespace HotelManagementApp.Infrastructure.Users.Persistence
             this._hotelManagementDbContext = hotelManagementDbContext;
         }
 
-        public void AddUser(User user)
+        public async Task AddUserAsync(User user)
         {
             _hotelManagementDbContext.Users.Add(user);
-            _hotelManagementDbContext.SaveChanges();
+            await _hotelManagementDbContext.SaveChangesAsync();
         }
 
-        public User? GetUserByEmail(string email)
+        public async Task<User?> GetUserByEmailAsync(string email)
         {
-            return _hotelManagementDbContext.Users.SingleOrDefault(u => u.Email == email);
+            return await _hotelManagementDbContext.Users.AsNoTracking()
+                .SingleOrDefaultAsync(u => u.Email == email); ;
         }
     }
 }

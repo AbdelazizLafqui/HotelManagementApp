@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelManagementApp.Infrastructure.Common.Persistence
 {
-    internal class HotelManagementDbContext : DbContext
+    public class HotelManagementDbContext : DbContext
     {
         public HotelManagementDbContext(DbContextOptions<HotelManagementDbContext> options)
             : base(options)

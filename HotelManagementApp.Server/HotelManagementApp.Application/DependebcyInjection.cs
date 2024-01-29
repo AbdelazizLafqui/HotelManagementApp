@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using HotelManagementApp.Application.Authentication.Commands.Register;
-using HotelManagementApp.Application.Authentication.Register.Commands;
 using HotelManagementApp.Application.Common.Behaviors;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;

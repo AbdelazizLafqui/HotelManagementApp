@@ -3,10 +3,8 @@ using HotelManagementApp.Application.Common.Interfaces.Authentication;
 using HotelManagementApp.Application.Common.Interfaces.Persistence;
 using HotelManagementApp.Application.DTOs;
 using HotelManagementApp.Domain.Common.Errors;
-using HotelManagementApp.Domain.Entities;
 using Mapster;
 using MediatR;
-using static HotelManagementApp.Domain.Common.Errors.CommonErrors;
 
 namespace HotelManagementApp.Application.Authentication.Register.Commands
 {
@@ -23,8 +21,9 @@ namespace HotelManagementApp.Application.Authentication.Register.Commands
         }
         public async Task<ErrorOr<AuthenticationResultDto>> Handle(RegisterCommand command, CancellationToken cancellationToken)
         {
+            var user = await _userRepository.GetUserByEmailAsync(command.Email);
 
-            if (_userRepository.GetUserByEmail(command.Email) is not null)
+            if (user is not null)
             {
                 return CommonErrors.User.DuplicateEmail;
             }
@@ -39,7 +38,7 @@ namespace HotelManagementApp.Application.Authentication.Register.Commands
 
             var token = _jwtTokenGenerator.GenerateToken(newUser);
 
-            _userRepository.AddUser(newUser);
+            await _userRepository.AddUserAsync(newUser);
 
             var userDto = newUser.Adapt<UserDto>();
 

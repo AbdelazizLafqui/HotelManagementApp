@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using HotelManagementApp.Domain.Common.Errors;
 using MapsterMapper;
 using HotelManagementApp.Application.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace HotelManagementApp.Api.Controllers
 {
     [Route("auth")]
+    [AllowAnonymous]
     public class AuthenticationController : ApiController
     {
         private readonly IMediator _mediator;
@@ -25,7 +27,7 @@ namespace HotelManagementApp.Api.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterRequest request)
+        public async Task<IActionResult> RegisterAsync(RegisterRequest request)
         {
             var command = _mapper.Map<RegisterCommand>(request); 
             ErrorOr<AuthenticationResultDto> authResult = await _mediator.Send(command);
@@ -36,7 +38,7 @@ namespace HotelManagementApp.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginRequest request)
+        public async Task<IActionResult> LoginAsync(LoginRequest request)
         {
             var query = _mapper.Map<LoginQuery>(request);
             ErrorOr<AuthenticationResultDto> authResult = await _mediator.Send(query);

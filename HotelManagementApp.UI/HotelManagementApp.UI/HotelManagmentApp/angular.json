@@ -78,7 +78,8 @@
               "buildTarget": "HotelManagmentApp:build:production"
             },
             "development": {
-              "buildTarget": "HotelManagmentApp:build:development"
+              "buildTarget": "HotelManagmentApp:build:development",
+              "proxyConfig": "src/proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HotelManagementApp.Contracts.Room
+﻿namespace HotelManagementApp.Contracts.Room
 {
     public record RoomResponse(
         Guid Id,
@@ -14,5 +8,5 @@ namespace HotelManagementApp.Contracts.Room
         string Bed,
         int Capacity,
         string Amenities,
-        double Amount);
+        double Price);
 }

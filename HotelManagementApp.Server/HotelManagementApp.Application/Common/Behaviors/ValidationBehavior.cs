@@ -1,15 +1,10 @@
 ﻿using ErrorOr;
 using FluentValidation;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelManagementApp.Application.Common.Behaviors
 {
-    public class ValidationBehavior<TRequest, TResponse> : 
+    public class ValidationBehavior<TRequest, TResponse> :
         IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>
         where TResponse : IErrorOr
@@ -21,18 +16,18 @@ namespace HotelManagementApp.Application.Common.Behaviors
             _validator = validator;
         }
 
-        public async Task<TResponse> Handle(TRequest request, 
-            RequestHandlerDelegate<TResponse> next, 
+        public async Task<TResponse> Handle(TRequest request,
+            RequestHandlerDelegate<TResponse> next,
             CancellationToken cancellationToken)
         {
-            if(_validator == null)
+            if (_validator == null)
             {
                 return await next();
             }
 
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
-            if(validationResult.IsValid)
+            if (validationResult.IsValid)
             {
                 return await next();
             }

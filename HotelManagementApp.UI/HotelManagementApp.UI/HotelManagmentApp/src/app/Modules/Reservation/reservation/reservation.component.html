@@ -2,10 +2,6 @@
 {{reservationForm.value | json}}
 
 <form [formGroup]="reservationForm">
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Reservation ID</mat-label>
-        <input type="text" matInput formControlName="reservationId" placeholder="Id">
-    </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Name</mat-label>
@@ -27,11 +23,20 @@
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Room</mat-label>
         <mat-select formControlName="room">
-            <mat-option value="king">King</mat-option>
-            <mat-option value="queen">Queen</mat-option>
-            <mat-option value="twin">Twin</mat-option>
+            <mat-option value="1">King</mat-option>
+            <mat-option value="2">Queen</mat-option>
+            <mat-option value="3">Twin</mat-option>
         </mat-select>
     </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Room</mat-label>
+        <mat-select formControlName="room">
+          <mat-option *ngFor="let roomOption of roomLookupItems" [value]="roomOption.roomId">
+            {{ roomOption.displayValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
 
     <mat-form-field class="example-full-width" appearance="fill">
@@ -54,7 +59,7 @@
     </mat-form-field>
 
     <div>
-        <button [disabled]="reservationForm.invalid" mat-raised-button color="primary">Book Room</button>
+        <button [disabled]="reservationForm.invalid" mat-raised-button (click)="addReservation()" color="primary">Book Room</button>
     </div>
 
 </form>

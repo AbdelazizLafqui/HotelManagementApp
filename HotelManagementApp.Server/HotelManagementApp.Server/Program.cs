@@ -23,9 +23,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//app.UseExceptionHandler("/error");
 app.UseHttpsRedirection();
 
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader();
+    opt.AllowAnyOrigin();
+    opt.AllowAnyMethod();
+});
+
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

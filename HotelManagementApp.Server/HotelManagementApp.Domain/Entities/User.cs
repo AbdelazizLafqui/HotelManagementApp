@@ -1,8 +1,9 @@
-﻿namespace HotelManagementApp.Domain.Entities
+﻿using HotelManagementApp.Domain.Common;
+
+namespace HotelManagementApp.Domain.Entities
 {
-    public class User
+    public class User : Entity
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public required string Email { get; set; }

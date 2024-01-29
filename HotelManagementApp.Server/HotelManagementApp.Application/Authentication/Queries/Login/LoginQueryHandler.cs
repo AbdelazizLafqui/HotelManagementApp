@@ -21,7 +21,7 @@ namespace HotelManagementApp.Application.Authentication.Queries.Login
 
         public async Task<ErrorOr<AuthenticationResultDto>> Handle(LoginQuery query, CancellationToken cancellationToken)
         {
-            var user = _userRepository.GetUserByEmail(query.Email);
+            var user = await _userRepository.GetUserByEmailAsync(query.Email);
 
             var userDto = user.Adapt<UserDto>();
 
