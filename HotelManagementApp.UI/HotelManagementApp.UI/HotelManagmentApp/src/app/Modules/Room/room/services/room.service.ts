@@ -3,11 +3,17 @@ import { Injectable } from '@angular/core';
 import { Room } from '../../../../shared/models/room';
 import { createRoomItem } from '../../../../shared/Items/createRoomItem';
 import { roomLookupItem } from '../../../../shared/Items/roomLookupItem';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class RoomService {
+
+
+  private addRoomSubscription?: Subscription;
+  private deleteRoomSubscription?: Subscription;
 
   constructor(private http:HttpClient) { }
 
@@ -22,14 +28,18 @@ export class RoomService {
   }
 
   addRoom(room: createRoomItem) {
-    return this.http.post<Room>('api/Room/addRoom', room).subscribe({
+    this.addRoomSubscription = this.http.post<Room>('api/Room/addRoom', room).subscribe({
+      complete: () =>{
+        alert("Successfully added")
+      },
       error: (error: HttpErrorResponse) => {
         alert(error.error.title);
       }
     });
   }
+
   deleteRoom(id: string){
-    return this.http.delete(`/api/Room/${id}`).subscribe({
+    this.deleteRoomSubscription = this.http.delete(`/api/Room/${id}`).subscribe({
       complete: () =>{
         alert("Successfully deleted")
       },
@@ -38,5 +48,11 @@ export class RoomService {
       }
     });
   }
+
+  unsubscribe(): void {
+    this.addRoomSubscription?.unsubscribe();
+    this.deleteRoomSubscription?.unsubscribe();
+  }
+
 
 }

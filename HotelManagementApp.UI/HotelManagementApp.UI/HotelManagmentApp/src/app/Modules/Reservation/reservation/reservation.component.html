@@ -1,4 +1,3 @@
-
 {{reservationForm.value | json}}
 
 <form [formGroup]="reservationForm">
@@ -7,7 +6,6 @@
         <mat-label>Name</mat-label>
         <input type="text" matInput formControlName="guestName" placeholder="Enter Name">
     </mat-form-field>
-
 
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Mobile Number</mat-label>
@@ -23,20 +21,11 @@
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Room</mat-label>
         <mat-select formControlName="room">
-            <mat-option value="1">King</mat-option>
-            <mat-option value="2">Queen</mat-option>
-            <mat-option value="3">Twin</mat-option>
+            <mat-option *ngFor="let roomOption of roomLookupItems" [value]="roomOption">
+                {{ roomOption.displayValue }}
+            </mat-option>
         </mat-select>
     </mat-form-field>
-
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Room</mat-label>
-        <mat-select formControlName="room">
-          <mat-option *ngFor="let roomOption of roomLookupItems" [value]="roomOption.roomId">
-            {{ roomOption.displayValue }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
 
 
     <mat-form-field class="example-full-width" appearance="fill">
@@ -46,20 +35,26 @@
 
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Check-in Date</mat-label>
-        <input matInput [matDatepicker]="checkinDatePicker" formControlName="checkinDate">
-        <mat-datepicker-toggle matIconSuffix [for]="checkinDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #checkinDatePicker></mat-datepicker>
+        <input matInput [matDatepicker]="checkInDatePicker" formControlName="checkInDate"
+        (dateChange)="onCheckDateChange()">
+        <mat-datepicker-toggle matIconSuffix [for]="checkInDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkInDatePicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Check-out Date</mat-label>
-        <input matInput [matDatepicker]="checkoutDatePicker" formControlName="checkoutDate">
-        <mat-datepicker-toggle matIconSuffix [for]="checkoutDatePicker"></mat-datepicker-toggle>
-        <mat-datepicker #checkoutDatePicker></mat-datepicker>
+        <input matInput [matDatepicker]="checkOutDatePicker" formControlName="checkOutDate"
+            (dateChange)="onCheckDateChange()">
+        <mat-error *ngIf="reservationForm.get('checkOutDate')?.hasError('dateRange')">
+            Check-out Date must be greater than Check-in Date.
+        </mat-error>
+        <mat-datepicker-toggle matIconSuffix [for]="checkOutDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #checkOutDatePicker></mat-datepicker>
     </mat-form-field>
 
     <div>
-        <button [disabled]="reservationForm.invalid" mat-raised-button (click)="addReservation()" color="primary">Book Room</button>
+        <button [disabled]="reservationForm.invalid" mat-raised-button (click)="addReservation()" color="primary">Book
+            Room</button>
     </div>
 
 </form>

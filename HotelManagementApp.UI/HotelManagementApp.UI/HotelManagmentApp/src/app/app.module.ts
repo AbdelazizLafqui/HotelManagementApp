@@ -52,7 +52,7 @@ import { MatTableModule } from '@angular/material/table';
     BrowserAnimationsModule,
     MatNativeDateModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
 
   ],
   providers: [

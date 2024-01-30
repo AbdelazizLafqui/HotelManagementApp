@@ -17,10 +17,10 @@ namespace HotelManagementApp.Application.Room.Queries
         public async Task<List<RoomLookupDto>> Handle(RoomLookupQuery request, CancellationToken cancellationToken)
         {
             var rooms = await _roomRepository.GetRoomsAsync();
-            var roomsLookup = rooms.Select(x => new RoomLookupDto(x.Id,$"FN :{x.FloorNumber}, RN :{x.RoomNumber}")).ToList();
-
-            var roomsDto = rooms.Adapt<List<RoomLookupDto>>();
-            return roomsDto;
+            var roomsLookup = rooms.Select(x => 
+                new RoomLookupDto(x.Id,$"FN :{x.FloorNumber}, RN :{x.RoomNumber}",x.Price))
+                .ToList();
+            return roomsLookup;
         }
 
     }

@@ -8,5 +8,6 @@ namespace HotelManagementApp.Application.DTOs
 {
     public record RoomLookupDto(
         Guid Id,
-        string DisplayValue);
+        string DisplayValue,
+        double Price);
 }

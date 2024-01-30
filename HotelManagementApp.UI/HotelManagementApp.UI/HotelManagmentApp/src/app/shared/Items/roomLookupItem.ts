@@ -1,4 +1,5 @@
 export interface roomLookupItem {
-    roomId: string;
+    id: string;
     displayValue: string;
+    price: number
 }

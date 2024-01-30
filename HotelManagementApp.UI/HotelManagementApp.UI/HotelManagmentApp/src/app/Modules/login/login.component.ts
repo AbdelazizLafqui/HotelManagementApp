@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './Services/login.service';
 import { UserLoginItem } from '../../shared/Items/userLoginItem';
@@ -10,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './login.component.html',
   styleUrl: './login.component.sass'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit, OnDestroy{
 
   registerFormLabel : string='New User? Register';
   showForm: boolean = true;
@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit{
 
     this.loginService.login(user);
   }
+  
   register()
   {
     const user:  UserRegisterItem = {
@@ -67,4 +68,9 @@ export class LoginComponent implements OnInit{
 
     this.loginService.register(user);
   }
+
+  ngOnDestroy(): void {
+    this.loginService.unsubscribe();
+  }
+
 }

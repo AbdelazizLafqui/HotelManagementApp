@@ -6,7 +6,6 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
@@ -23,12 +22,6 @@ export class RequestInterceptor implements HttpInterceptor {
       },
     });
 
-    console.log('HTTP Request:', authRequest);
-
-    return next.handle(authRequest).pipe(
-      tap((event) => {
-        console.log('HTTP Response:', event);
-      })
-    );
+    return next.handle(authRequest);
   }
 }

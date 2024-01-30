@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { RoomService } from './services/room.service';
-import { Room } from '../../../shared/models/room';
 import { createRoomItem } from '../../../shared/Items/createRoomItem';
 
 @Component({
@@ -10,8 +9,10 @@ import { createRoomItem } from '../../../shared/Items/createRoomItem';
   styleUrl: './room.component.sass',
 
 })
-export class RoomComponent implements OnInit {
+export class RoomComponent implements OnInit, OnDestroy {
+
   AddingRoomForm!: FormGroup;
+
   constructor(private fb: FormBuilder, private roomService: RoomService) {
   }
 
@@ -40,6 +41,13 @@ export class RoomComponent implements OnInit {
 
     this.roomService.addRoom(room);
 
+    this.AddingRoomForm.reset();
+
   }
+
+  ngOnDestroy(): void {
+    this.roomService.unsubscribe();
+  }
+
 
 }

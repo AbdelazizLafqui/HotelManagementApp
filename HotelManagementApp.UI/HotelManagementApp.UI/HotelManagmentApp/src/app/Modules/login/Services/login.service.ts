@@ -1,20 +1,24 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { UserLoginItem } from '../../../shared/Items/userLoginItem';
 import { UserRegisterItem } from '../../../shared/Items/userRegisterItem';
 import { User } from '../../../shared/models/User';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
+  private loginSubscription?: Subscription;
+  private registerSubscription?: Subscription;
+  
   constructor(private http: HttpClient,private router: Router) { }
 
 
   login(userLoginItem: UserLoginItem) {
-    return this.http.post<User>('api/auth/login', userLoginItem).subscribe({
+    this.loginSubscription = this.http.post<User>('api/auth/login', userLoginItem).subscribe({
       next: (response) => {
         const token = response.token
         localStorage.setItem('auth_token', token);
@@ -29,7 +33,7 @@ export class LoginService {
   }
 
   register(userRegisterItem: UserRegisterItem) {
-    return this.http.post<User>('api/auth/register', userRegisterItem).subscribe({
+    this.registerSubscription = this.http.post<User>('api/auth/register', userRegisterItem).subscribe({
       next: (response) => {
         const token = response.token
         localStorage.setItem('auth_token', token);
@@ -42,6 +46,11 @@ export class LoginService {
       }
 
     });
+  }
+
+  unsubscribe(): void {
+    this.loginSubscription?.unsubscribe();
+    this.registerSubscription?.unsubscribe();
   }
 
 }
